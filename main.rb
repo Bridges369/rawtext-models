@@ -30,6 +30,29 @@ r : Remove
 {"minecraft:keep_on_death":{}}
 =end
 
+class Parse
+  # obj = Parse.new(
+  #   sign: {/\n/ => '', /\s/ => ''},
+  #   sign_with_new_lines: {/\n/ => '\\n'}
+  # )
+  def initialize(**modes)
+    @modes = modes
+  end
+
+  def parse(text)
+    collect = Array.new(@modes.length)
+
+    @modes.each_with_index do |hash, i|
+      # The method below of this don't return the string, therefore the gsub! method will be used in a variable tmp
+      tmp = text
+      # Replace tmp according to the each replacements hashes
+      hash[1].each { |k, v| tmp.gsub!(k, v) }
+      collect[i] = tmp
+    end
+    return collect
+  end
+end
+
 component = <<-JSON
 §7{
   §8"minecraft:§fkeep_on_death§8"§7: {}
@@ -42,6 +65,12 @@ title = <<-TEXT
 §8-----------
 TEXT
 
+pa = Parse.new(
+  book: {"\n" => "n", "\s\s" => "ss"}
+)
+p pa.parse(component)
+
+__END__
 IO.write("clip.txt", <<~EOF
 tellraw @a {"rawtext":[{"text":"§8--------------------------------§r\\n#{component
   .chomp
