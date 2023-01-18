@@ -1,5 +1,0 @@
-tellraw @a {"rawtext":[{"text":"§8--------------------------------§r\n§7{\n  §8\"minecraft:§fkeep_on_death§8\"§7: {}\n§7}\n§8--------------------------------"}]}
-
-§7{§8"minecraft:§fkeep_on_death§8"§7:{}§7}
-
-{"rawtext":[{"text":"§8------------\n§fkeep_on_death\n§8-----------"}]}
